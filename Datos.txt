@@ -1,0 +1,4 @@
+{"nombre":"ANNETTE","edad":"21","sexo":"FEMENINO"}
+{"nombre":"Omar Santa Maria","edad":"21","sexo":"Masculino"}
+{"nombre":"Carlos","edad":"21","sexo":"Masculino"}
+{"nombre":"Sofia","edad":"12","sexo":"Femenino"}
