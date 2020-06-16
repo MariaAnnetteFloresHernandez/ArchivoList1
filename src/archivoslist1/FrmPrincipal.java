@@ -19,6 +19,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     DefaultTableModel modelotabla = new DefaultTableModel();
     List<Atributos> Datos = new ArrayList<>(); 
+    int posicion = 0;
     /**
      * Creates new form FrmPrincipal
      */
@@ -48,6 +49,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbDatos = new javax.swing.JTable();
         btnGrabar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,12 +76,38 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbDatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbDatosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbDatos);
 
         btnGrabar.setText("Grabar");
         btnGrabar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGrabarActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnActualizar.setText("Actualizar ");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -94,19 +124,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(txtSexo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                                        .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.LEADING))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnGrabar))
-                                .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtEdad, javax.swing.GroupLayout.Alignment.LEADING)))
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnLimpiar)
+                                    .addComponent(btnGrabar))))))
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnActualizar))
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,22 +153,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addGap(13, 13, 13)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGrabar))
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(btnLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(btnActualizar)
+                .addGap(1, 1, 1)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -149,10 +193,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         conexion.Agregar(dato);
         Datos = conexion.getDatos();
         
-        if (conexion.Grabar(Datos)){
+        if (conexion.Grabar(Datos, 0)){
+            modelotabla = (DefaultTableModel) tbDatos.getModel();
+            modelotabla.getDataVector().removeAllElements();
             JOptionPane.showMessageDialog(this, "Se grabo correctamente",
                     "Grabado", JOptionPane.INFORMATION_MESSAGE);
-            CargarRegistrosTabla();
+            Cargar();
         }else{
             JOptionPane.showMessageDialog(this, "Error al grabar la informacion",
                     "Erro", JOptionPane.ERROR_MESSAGE);
@@ -160,6 +206,69 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnGrabarActionPerformed
+
+    private void tbDatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDatosMouseClicked
+        // TODO add your handling code here:
+        int nfilas = tbDatos.getSelectedRowCount();
+        int fila = 0;
+        if (nfilas == 1){
+            fila = tbDatos.getSelectedRow();
+            posicion = fila;
+            txtNombre.setText(tbDatos.getValueAt(fila, 0). toString());
+            txtEdad.setText(tbDatos.getValueAt(fila, 1). toString());
+            txtSexo.setText(tbDatos.getValueAt(fila, 2). toString());
+        }
+    }//GEN-LAST:event_tbDatosMouseClicked
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        txtNombre.setText("");
+        txtEdad.setText("");
+        txtSexo.setText("");
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+       Archivos conexion = new Archivos();
+        Atributos dato = new Atributos();
+        
+        dato.setNombre(txtNombre.getText().toString());
+        dato.setEdad(txtEdad.getText().toString());
+        dato.setSexo(txtSexo.getText().toString());
+        
+        Datos.set(posicion, dato);
+        
+        if (conexion.Grabar(Datos, 1)){
+            modelotabla = (DefaultTableModel) tbDatos.getModel();
+            modelotabla.getDataVector().removeAllElements();
+            JOptionPane.showMessageDialog(this, "Se actualizo correctamente",
+                    "Actualizado", JOptionPane.INFORMATION_MESSAGE);
+            Cargar();
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al actualizar la informacion",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+       Archivos conexion = new Archivos();
+
+        Datos.remove(posicion);
+        
+        if (conexion.Grabar(Datos, 1)){
+            modelotabla = (DefaultTableModel) tbDatos.getModel();
+            modelotabla.getDataVector().removeAllElements();
+            JOptionPane.showMessageDialog(this, "Se elimino correctamente",
+                    "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+            Cargar();
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al eliminar la informacion",
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+            
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,7 +309,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         Archivos conexion = new Archivos();
         if (conexion.verificaArch()){
             if (conexion.Leer()){
-                Datos = conexion.getDatos();
+                Datos = conexion.getDatos();   
                 CargarRegistrosTabla();
             }else{
                 JOptionPane.showMessageDialog(this,
@@ -234,7 +343,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGrabar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
